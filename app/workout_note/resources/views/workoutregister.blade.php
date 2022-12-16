@@ -11,11 +11,14 @@
 
 
 <!doctype html>
-<a href="{{ route('mypage') }}">
-      <button type='button' class=''>マイページ</button>
+      <a href="{{ route('mypage') }}">
+        <button type='button' class=''>マイページ</button>
       </a>
 
-<h>登録画面</h>
+<h class=hyoudai>登録画面</h>
+
+<form action="{{ route('workout')}}" method="post">
+                            @csrf
 
 <div class="row">
 <div class="col">
@@ -23,16 +26,17 @@
   </div>
   <div class="col">
 
-    <input type="text" class="form-control" placeholder="" aria-label="">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="weight">
   </div>
   
 </div>
+<a href="{{ route('add') }}">
+<div class='row justify-content-center'>
 
-
-  <a href="{{ route('add') }}">
-            <butoon type='button' class='btn btn-secondary'>種目の追加</button>
-            </a>
-
+            <butoon type='button' class='btn btn-primary w-25 mt-3'>種目の追加</button>
+          
+</div>
+</a>
 
 
   <div class="row">
@@ -54,41 +58,23 @@
 
   <div class="row">
   <div class="col">
-    <input type="text" class="form-control" placeholder="" aria-label="" name="menu">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="menu_id">
   </div>
   <div class="col">
     <input type="text" class="form-control" placeholder="" aria-label="" name="weight">
   </div>
   <div class="col">
-    <select type="text" class="form-control" placeholder="" aria-label="" name="rep">
-    <option value=''>1</option>
-    <option value=''>2</option>
-    <option value=''>3</option>
-    <option value=''>4</option>
-    <option value=''>5</option>
-    <option value=''>6</option>
-    <option value=''>7</option>
-    <option value=''>8</option>
-    <option value=''>9</option>
-    <option value=''>10</option>
-    <option value=''>11</option>
-    <option value=''>12</option>
-    </select>
+    <input type="text" class="form-control" placeholder="" aria-label="" name="rep">
   </div>
   <div class="col">
-    <select type="text"  class="form-control" placeholder="" aria-label="" name="set">
-   
-<option value=''>1</option>
-<option value=''>2</option>
-<option value=''>3</option>
-</select>
-    
+    <input type="text" class="form-control" placeholder="" aria-label="" name="set">
   </div>
 </div>
 
-<a href="{{ route('home') }}">
-            <butoon type='button' class='btn btn-secondary'>登録</button>
-            </a>
+<div class='row justify-content-center'>
+    <button type='submit' class='btn btn-primary w-25 mt-3'>追加</button>
+</div> 
+
 
 
 <style>
@@ -96,8 +82,15 @@
 .row {width: 40%;
 padding top: 30px;
 margin: auto;}
-h3{margin left: 50px;}
-.butoon{margin:auto;}
+.hyoudai{
+  text-align: center;
+  margin-left:630px;
+font size:30px;}
+
+button{text-align: center;
+  margin left:300px;}
+body{padding top:50px}
+
 
 
 </style>

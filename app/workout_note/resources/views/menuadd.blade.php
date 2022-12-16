@@ -12,13 +12,16 @@
 
 <!doctype html>
 
-
 <a href="{{ route('mypage') }}">
-      <button type='button' class=''>マイページ</button>
-      </a>
+    <button type='button' class=top>マイページ</button>
+            </a>
 
 
 
+      <main class="py-4">
+       
+            <div class="card">
+                <div class="card-header">
 
 
                             <div class="card-body">
@@ -37,3 +40,35 @@
                         </form>
                     </div>
                 </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+<style>
+textarea.form-control{
+    width: 400px;
+    text-align: center;
+    margin: auto;}
+.mt-2{
+    text-align: center;
+    margin-left: 500px;
+    font-size:15px
+}
+.top{  display       : inline-block;
+  border-radius : 50%;          /* 角丸       */
+  font-size     : 15pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 23px 37px;   /* 余白       */
+  background    : #000066;     /* 背景色     */
+  color         : #ffffff;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+  box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
+  border        : 2px solid #000066;    /* 枠の指定 */}
+</style>

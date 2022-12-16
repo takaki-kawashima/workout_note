@@ -19,7 +19,7 @@
     
       
       <h3 class=my>マイページ</h3>
-      <a href="{{ route('home') }}">
+      <a href="{{ route('top') }}">
       <button type='button' class=top>TOP</button>
       </a>
       </div>

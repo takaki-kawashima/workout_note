@@ -30,11 +30,18 @@
 
 <h3>プロフィール</h3><br>
 
-<h3>名前</h3>
-<br><h3>フリガナ</h3>
-<br><h3>アドレス</h3>
-<br><h3>目的</h3>
+@foreach($prof  as $profile)
 
+<h3>名前</h3>
+{{ $profile->name }}
+<br><h3>フリガナ</h3>
+{{ $profile->rubi }}
+<br><h3>アドレス</h3>
+{{ $profile->email }}
+<br><h3>目的</h3>
+{{ $profile->purpose }}
+@endforeach
+<br>
 <a href="{{ route('prof_update') }}">
       <button type='button' class=''>編集</button>
       </a>

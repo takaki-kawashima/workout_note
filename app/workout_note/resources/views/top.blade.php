@@ -13,15 +13,21 @@
 <header>
 
     <div class=tophead>
+  
     <a href="{{ route('mypage') }}">
-            <butoon type='button' class='btn btn-secondary'>マイページ</button>
+    <button type='button' class=top>マイページ</button>
             </a>
       
       <h3 class=logo>workout log</h3>
 
-      <a href="/">
-            <butoon type='button' class='btn btn-secondary'>ログアウト</button>
+      <a href="/logout">
+      <button type='button' class=top>ログアウト</button>
+           
             </a>
+
+            
+
+
       
       </div>
     
@@ -30,14 +36,59 @@
 
 
 </header>
+
+<div class="container">
+  <div class="row">
+   
+    <div class="col-md-8">
+      <h1>トレーニング履歴</h1>
+      <div class=log>
+
+                        <div class="card-body">
+                            <div class="card-body">
+                                <table class='table'>
+
+      @foreach($menus  as $menu)
+                                            <tr>
+                                          
+                                                   
+                                            <th scope='col'>
+                                                 
+                                                    </th>
+                                                <th scope='col'>{{ $menu->name }}</th>
+                                                <th scope='col'>{{ $menu->date }}</th>                                              
+                                                <th scope='col'>{{ $menu->id }}</th>
+                                                
+                                                <th scope='col'>
+                                                <a href="{{ route('detail', $menu->id) }}">詳細</a>
+                                                    </th>
+                                                   
+                        
+                                               
+                                                
+                                            </tr>
+                                            @endforeach
+                                     
+                                            </table>
+                            </div>
+                        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 <style>
+header{padding bottom: 30px;
+}
 .tophead{display: flex;
   align-items: center;
+  padding bottom: 30px;
 }
 .logo{margin-left: auto;
   margin-right: auto;
   font-size:30px;}
-.my{  display       : inline-block;
+.top{  display       : inline-block;
   border-radius : 50%;          /* 角丸       */
   font-size     : 15pt;        /* 文字サイズ */
   text-align    : center;      /* 文字位置   */
@@ -50,25 +101,14 @@
   box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
   border        : 2px solid #000066;    /* 枠の指定 */}
   
-.out{margin-left: auto;
-  display       : inline-block;
-  border-radius : 50%;          /* 角丸       */
-  font-size     : 15pt;        /* 文字サイズ */
-  text-align    : center;      /* 文字位置   */
-  cursor        : pointer;     /* カーソル   */
-  padding       : 23px 37px;   /* 余白       */
-  background    : #000066;     /* 背景色     */
-  color         : #ffffff;     /* 文字色     */
-  line-height   : 1em;         /* 1行の高さ  */
-  transition    : .3s;         /* なめらか変化 */
-  box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
-  border        : 2px solid #000066;    /* 枠の指定 */}
+
+
 
 </style>
    
  
-    
 
 
 
-</body>
+
+
