@@ -34,7 +34,7 @@
             <a href="{{ route('menu') }}">
             <butoon type='button' class='btn btn-secondary'>おすすめメニュー</button>
             </a>
-            <a href="{{ route('workout') }}">
+            <a href="{{ route('record.create') }}">
             <butoon type='button' class='btn btn-secondary'>トレーニングの登録</button>
             </a>
             <a href="{{ route('prof') }}">
@@ -64,7 +64,35 @@
     <div class="col-md-8">
       <h1>トレーニング履歴</h1>
       <div class=log>
-      <p>Sample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample Text</p>
+      <div class="card-body">
+                            <div class="card-body">
+                                <table class='table'>
+                           
+      @foreach($menus  as $menu)
+    
+                                            <tr>
+                                          
+                                                   
+                                            <th scope='col'>
+                                                 
+                                                    </th>
+                                                <th scope='col'>{{ $menu->name }}</th>
+                                                <th scope='col'>{{ $menu->date }}</th>                                              
+                                                <th scope='col'>{{ $menu->id }}</th>
+                                                
+                                                <th scope='col'>
+                                                <a href="{{ route('record.show', $menu->id) }}">詳細</a>
+                                                    </th>
+                                                   
+                        
+                                               
+                                                
+                                            </tr>
+                                            @endforeach
+                                     
+                                            </table>
+                            </div>
+                        </div>
       </div>
     </div>
   </div>
@@ -76,7 +104,7 @@
    
     <div class="col-md-8">
       <h1>体重推移</h1>
-      <p>Sample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample TextSample Text</p>
+      {{ $log_list }}
     </div>
   </div>
 </div>
@@ -107,6 +135,10 @@ margin-top: 30px;}
 .log{
   overflow:auto;
   width: 600px;height: 300px;
+}
+.my{
+  font-size: 30px;
+  width: 500px;
 }
 
 

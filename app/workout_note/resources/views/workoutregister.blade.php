@@ -17,8 +17,18 @@
 
 <h class=hyoudai>登録画面</h>
 
-<form action="{{ route('workout')}}" method="post">
+<form action="{{ route('record.store')}}" method="post">
                             @csrf
+
+                            <div class="row">
+<div class="col">
+  <h3>タイトル</h3>
+  </div>
+  <div class="col">
+
+    <input type="text" class="form-control" placeholder="" aria-label="" name="title">
+  </div>                        
+
 
 <div class="row">
 <div class="col">
@@ -26,7 +36,7 @@
   </div>
   <div class="col">
 
-    <input type="text" class="form-control" placeholder="" aria-label="" name="weight">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="body_weight">
   </div>
   
 </div>
@@ -38,6 +48,21 @@
 </div>
 </a>
 
+<label>{{ __('材料') }}
+      <a onclick=add() class="btn btn-sm btn-light">+追加</a>
+      <div id="input_plural">
+
+<div class ='panel-body'>
+  @if($errors->any())
+  <div class='alert alert-danger'>
+    <ul>
+      @foreach($errors->all() as $message)
+      <li>{{ $message }}</li>
+      @endforeach
+    </ul>
+  </div>
+  @endif
+</div>
 
   <div class="row">
   <div class="col">
@@ -54,22 +79,43 @@
   </div>
 </div>
 
-
+<div id="input_pluralBox">
+    <div id="input_plural">
 
   <div class="row">
+  <div class="col" id="syumoku">
+    <select type="text" class="form-control" placeholder="" aria-label="" name="menu_id[]"  >
+    <option value=''>種目</option>
+                                @foreach($menus as $menu)
+                                <option value="{{ $menu->menu}}">{{ $menu->menu }}  </option>
+                                @endforeach
+    </select>
+  </div>
+ 
+                                
+                            
+
   <div class="col">
-    <input type="text" class="form-control" placeholder="" aria-label="" name="menu_id">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="weight[]" value="{{ old('weight') }}"/>
   </div>
   <div class="col">
-    <input type="text" class="form-control" placeholder="" aria-label="" name="weight">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="rep[]" value="{{ old('rep') }}"/>
   </div>
   <div class="col">
-    <input type="text" class="form-control" placeholder="" aria-label="" name="rep">
+    <input type="text" class="form-control" placeholder="" aria-label="" name="set[]" value="{{ old('set') }}"/>
   </div>
-  <div class="col">
-    <input type="text" class="form-control" placeholder="" aria-label="" name="set">
-  </div>
+  <input type="button" value="＋" class="add pluralBtn">
+        <input type="button" value="－" class="del pluralBtn">
 </div>
+
+</div>
+</div>   
+
+          </div>
+      </div>
+</label>
+
+
 
 <div class='row justify-content-center'>
     <button type='submit' class='btn btn-primary w-25 mt-3'>追加</button>
@@ -93,5 +139,75 @@ body{padding top:50px}
 
 
 
+
+
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).on("click", ".add", function() {
+    $(this).parent().clone(true).insertAfter($(this).parent());
+});
+$(document).on("click", ".del", function() {
+    var target = $(this).parent();
+    if (target.parent().children().length > 1) {
+        target.remove();
+    }
+});
+</script>
+
+
+
+ 
+
+
+       
+
+<script>
+  let inputPlural = document.getElementById('input_plural');
+var count = 4;
+
+function add() {
+    let div = document.createElement('DIV');
+    div.classList.add('d-flex');
+
+
+
+    
+    var input = document.getElementById('syumoku');
+    input.classList.add('form-control');
+    input.setAttribute('menu_id', 'ing-name-'+count);
+    div.append(input);
+
+
+
+    var input = document.createElement('INPUT');
+    input.classList.add('form-control');
+    input.setAttribute('weight', 'ing-name-'+count);
+    div.appendChild(input);
+    
+    var input = document.createElement('INPUT');
+    input.classList.add('form-control');
+    input.setAttribute('rep', 'ing-name-'+count);
+    div.appendChild(input);
+
+    var input = document.createElement('INPUT');
+    input.classList.add('form-control');
+    input.setAttribute('set', 'ing-size-'+count);
+    div.appendChild(input);
+
+    var input = document.createElement('INPUT');
+    input.setAttribute('type', 'button');
+    input.setAttribute('value', '削除');
+    input.setAttribute('onclick', 'del(this)');
+    div.appendChild(input);
+
+    inputPlural.appendChild(div);
+    count++;
+}
+
+function del(o) {
+    o.parentNode.remove();
+}
+</script>
   

@@ -18,49 +18,136 @@
                         <div class="card-header">
                             <div class='text-center'>詳細</div>
                         </div>
+                        <a href="{{ route('record.index') }}">
+      <button type='button' class=top>TOP</button>
+      </a>
+                       
                         <div class="card-body">
-                           
+                        
                                 <table class='table'>
                                     
-                                @foreach($menus  as $menu)
+                              
                                 <thead>
+                            
                                         <tr>
                                             <th scope='col'>日付</th>
                                             <th scope='col'>種目</th>
                                             <th scope='col'>weight</th>
                                             <th scope='col'>rep</th>
                                             <th scope='col'>set</th>
+                                            <th scope='col'></th>
+                                            <th scope='col'></th>
                                         </tr>
                                     </thead>
+                                    @foreach($menus  as $menu)
                                     <tbody>
                                       
                                         <tr>
                                                   
                                             <th scope='col'>{{ $menu->date }}</th>
-                                            <th scope='col'>{{ $menu->menu }}</th>
+                                            <th scope='col'>{{ $menu->menu_id }}</th>
                                             <th scope='col'>{{ $menu->weight }}</th>
                                             <th scope='col'>{{ $menu->rep }}</th>
                                             <th scope='col'>{{ $menu->set }}</th>
-                                                
+                                            <th> 
+                         <form action="{{ route('record.destroy' ,['record' => $menu->id ])}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                        <a href="{{ route('record.destroy' , $menu->record_id) }}" onclick="return confirm('削除してよろしいですか？')">
+                        @if((Auth::user()->id) == ($menu->user_id))
+                        <button class='btn btn-primary w-150 mt-3'>削除</button>
+                        @endif
+                        </a>
+                        </form>
+</th>
+<th>
+<a href="{{ route('record.edit' , $menu->id) }}">
+                        @if((Auth::user()->id) == ($menu->user_id))
+                            <button class='btn btn-primary w-150 mt-3'>編集</button>
+                        @endif
+                        </a>
+</th>
+ 
                                         </tr>
+                                        
                                        
                                     </tbody>
-                                @endforeach
+                                    @endforeach
 
                                 </table>
 
-
+                              
                                
-
-                         <div class='d-flex justify-content-center mt-3' >
-                        <a href="{{ route('delete' , $menu->id) }}" onclick="return confirm('削除してよろしいですか？')">
-                        <button class='btn btn-secondary'>削除</button>
-                        </a>
-
-                        <a href="{{ route('editreco' , $menu->id) }}">
-                            <button class='btn btn-secondary'>編集</button>
-                        </a>
+                     
+                        
                         </div>
+                      
                     </div>
+
+</body>
+                
+
+<div class="col-md-8">
+      <h1>コメント</h1>
+      <form action="{{ route('commentadd' ,['id' => $menu->id ])}}" method="post">
+      @csrf
+      <div class="form-group">
+      
+      <textarea class='form-control' name='comment'></textarea>
+		
+	
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">投稿する</button>
+	</div>
+</form>
+
+
+
+
+</div>
+
+
+
+<div class="container">
+
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr><th>ユーザ名</th><th>投稿日</th></th><th>内容</th><th colspan="1"></th></tr>
+          </thead>
+          <tbody>
+          @foreach($comments  as $comment)
+              
+          <td> {{ $comment->name }} </td>
+          <td> {{ $comment->created_at }} </td>
+
+          <td> {{ $comment->comment }} </td><br>
+          
+          <td><div class='d-flex justify-content-center ' >
+                        <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
+                        @if((Auth::user()->id) == ($comment->user_id))
+                        <button class='btn btn-primary w-150 mt-3'>削除</button>
+                        @endif
+                        </a></td>
+    
+              
+                
+                
+       
+             
+          </tbody>
+          @endforeach
+        </table>
+     
+  </div>
+
+</div>
+
+
+
+
+
+
+
 
                     

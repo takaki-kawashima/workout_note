@@ -12,6 +12,8 @@ use App\MenuRecord;
 use App\Menu;
 use App\User;
 
+use App\Models\Item;
+use App\Http\Requests\MenuAdd;
 use Illuminate\Support\Facades\DB;
 
 class Registercontroller extends Controller
@@ -43,9 +45,14 @@ class Registercontroller extends Controller
         $workout->save();
         $data->save();
 
-        return view('mypage');
+
+
+
+        return redirect('mypage');
 
         
+
+
     }
  
     public function menuadd(){
@@ -55,10 +62,10 @@ class Registercontroller extends Controller
 
 }
 
-    public function menuadd2(Request $request){
+    public function menuadd2(MenuAdd $request){
         // dd($request->menu);
-
-        $user_id=1;
+        $user = auth()->id();
+        $user_id=$user;
         // Menu::create([
         //     'menu' => $request->menu,
         //     'user_id' => $user_id,
@@ -72,28 +79,97 @@ class Registercontroller extends Controller
     
 
     
-    
+    // dd($menu);
     $menu->save();
 
-    return view('workoutregister');
+    return redirect('workout',
+      
+     
+    );
 }
 
 
-    public function profile_update(){
-    return view('profile_update', [
+public function profile(Request $request ) {
+
+    $id = auth()->id();
+
+    $profile= DB::table('users')
+           
+            ->where('id','=',$id)
+            ->get();
+
+  
+    return view('profile', [
+        'prof'=>$profile,
     ]
-);
+        
+    
+    );
+
 
 }
+
+
+    public function EditProfile(Request $request ) {
+
+
+    
+        $id = auth()->id();
+    
+        $profile= DB::table('users')
+               
+                ->where('id','=',$id)
+                ->get();
+    
+      
+        return view('profile_edit', [
+            'prof'=>$profile,
+        ]
+            
+        
+        );
+    
+    
+    }
+    public function profile_update(int $id , Request $request ) {
+
+        // dd($id);
+        $instance = new User;
+        $record = $instance->find($id);
+        $record->name = $request->name;
+        $record->rubi = $request->rubi;
+        $record->email = $request->email;
+        $record->purpose = $request->purpose;
+
+        
+    
+        $record->save();
+    
+
+     
+
+
+        return redirect('profile');
+      
+    
+      
+       
+    
+    
+    }
+
+
+
+
 
 public function editRecordForm(int $id ,Request $request ) {
  
     // dd($id);
     
         $menus= DB::table('records')
-                ->join('menu_record', 'records.id', '=', 'menu_record.record_id')
-                ->join('menus', 'menu_record.menu_id', '=', 'menus.id')
-                ->where('menu_record.record_id','=',$id)
+                ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
+                ->join('menus', 'record_menu.menu_id', '=', 'menus.id')
+                ->where('record_menu.record_id','=',$id)
                 ->get();
                
     // dd($menus);
@@ -106,52 +182,50 @@ public function editRecordForm(int $id ,Request $request ) {
     
 }
 
-
-public function editrecord2(Request $request) {
-    $id=$request->id;
+public function commentAdd(int $id,Request $request){
+ 
+    $user = auth()->id();
     // dd($id);
-    
-        $menus= DB::table('records')
-                ->join('menu_record', 'records.id', '=', 'menu_record.record_id')
-                ->join('menus', 'menu_record.menu_id', '=', 'menus.id')
-                ->where('menu_record.recordid','=',$id)
-                ->update([
-                    'menu' => '$menus->menu',
-                    'weight' => '$menus->weight',
-                    'rep' => '$menus->rep',
-                    'set' => '$menus->set',
-                ]);
 
-        $menus->save();
+$comment = new Comment;
 
-        return view('top', [
-            
-        ]);
-    
 
-   
+$comment->comment = $request->comment;
+$comment->user_id = $user;
+$comment->record_id=$id;
+
+$comment->save();
+
+
+return back();
 }
 
 
-public function Delete(int $id)
-{
-//  dd($id);
-//    $instance = new Record;
-// dd($instance);
 
-$record=DB::table('records')
-            ->where('records.id', '=', $id);
-//    $record=$instance->find($id);
-   
 
-    
-//   dd($record);
-    $record->delete();
-    
-    
-    return redirect('/');
-    
+
+
+    public function upload(Request $request)
+    {
+        // ディレクトリ名
+        $dir = 'img';
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+
+        return redirect('/');
+    }
 }
 
 
-}
+
+
+
+
+
+
+
+

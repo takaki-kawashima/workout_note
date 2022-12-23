@@ -12,12 +12,20 @@
 
 <header>
 
-    <div class=tophead>
-  
+<div class=tophead>
+    @if((Auth::user()->user_flg) == ($flgs))
     <a href="{{ route('mypage') }}">
     <button type='button' class=top>マイページ</button>
             </a>
-      
+            <a href="{{ route('userlist') }}">
+            @endif
+
+    @if((Auth::user()->user_flg) == ($flg))
+    <a href="{{ route('userlist') }}">
+                        <button type='button' class=top>ユーザリスト</button>
+                        @endif
+                      
+                        </a>
       <h3 class=logo>workout log</h3>
 
       <a href="/logout">
@@ -25,7 +33,6 @@
            
             </a>
 
-            
 
 
       
@@ -38,11 +45,14 @@
 </header>
 
 <div class="container">
+
+
   <div class="row">
-   
+  
     <div class="col-md-8">
-      <h1>トレーニング履歴</h1>
-      <div class=log>
+    <div class=log>
+   
+      
 
                         <div class="card-body">
                             <div class="card-body">
@@ -55,12 +65,13 @@
                                             <th scope='col'>
                                                  
                                                     </th>
-                                                <th scope='col'>{{ $menu->name }}</th>
-                                                <th scope='col'>{{ $menu->date }}</th>                                              
-                                                <th scope='col'>{{ $menu->id }}</th>
+                                                <th scope='col'>{{ $menu->date }}</th>
+                                                <th scope='col'>{{ $menu->name }}</th>  
+                                                <th scope='col'>{{ $menu->purpose}}</th>
+                                                <th scope='col'>{{ $menu->title }}</th>
                                                 
                                                 <th scope='col'>
-                                                <a href="{{ route('detail', $menu->id) }}">詳細</a>
+                                                <a href="{{ route('record.show', $menu->id) }}">詳細</a>
                                                     </th>
                                                    
                         
@@ -78,16 +89,20 @@
   </div>
 </div>
 </body>
+
 <style>
+  
 header{padding bottom: 30px;
 }
 .tophead{display: flex;
   align-items: center;
   padding bottom: 30px;
+  margin top :50px;
 }
 .logo{margin-left: auto;
   margin-right: auto;
-  font-size:30px;}
+  font-family: 'Amatic SC', cursive;
+  font-size:50px;}
 .top{  display       : inline-block;
   border-radius : 50%;          /* 角丸       */
   font-size     : 15pt;        /* 文字サイズ */
@@ -100,6 +115,11 @@ header{padding bottom: 30px;
   transition    : .3s;         /* なめらか変化 */
   box-shadow    : 6px 6px 3px #666666;  /* 影の設定 */
   border        : 2px solid #000066;    /* 枠の指定 */}
+  .log{
+    margin-left: 100px;
+    width: 1000px;
+    padding-top: 30px;;
+  }
   
 
 

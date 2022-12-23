@@ -61,9 +61,9 @@
                             <div class="col-md-6">
                                 <select name="purpose" id="purpose" type="text" class="form-control @error('purpose') is-invalid @enderror"  value="{{ old('purpose') }}" required autocomplete="purpose" autofocus>
                                 <option hidden>選択してください</option>
-                                <option value="1">パワーアップ</option>
-                                <option value="2">バルクアップ</option>
-                                <option value="3">シェイプアップ</option>
+                                <option value="パワーアップ">パワーアップ</option>
+                                <option value="バルクアップ">バルクアップ</option>
+                                <option value="シェイプアップ">シェイプアップ</option>
                                 </select>
                                 @error('purpose')
                                     <span class="invalid-feedback" role="alert">
@@ -72,6 +72,8 @@
                                 @enderror
                             </div>
                         </div>
+
+                        
 
                        
                                

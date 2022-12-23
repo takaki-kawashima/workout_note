@@ -13,14 +13,19 @@ class CreateDataMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_menu', function (Blueprint $table) {
+        Schema::create('record_menu', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->float('weight');
             $table->integer('rep');
             $table->integer('set');
-            $table->integer('menu_id');
-            $table->integer('date_id');
+            $table->string('menu_id', '255');
+            $table->unsignedBigInteger('record_id');
             $table->timestamps();
+
+            $table->foreign('record_id') //外部キーの宣言
+            ->references('id') //参照先
+            ->on('records') //参照テーブル
+            ->onDelete('cascade'); //参照テーブルカラムが消えたら同時に消す
             
         });
     }

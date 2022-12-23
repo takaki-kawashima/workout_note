@@ -13,12 +13,16 @@ class CreateMenuTable extends Migration
      */
     public function up()
     {
-        Schema::create('menu', function (Blueprint $table) {
+        Schema::create('menus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('menu', '255');
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
             
+            $table->foreign('user_id') //外部キーの宣言
+            ->references('id') //参照先
+            ->on('users') //参照テーブル
+            ->onDelete('cascade'); //参照テーブルカラムが消えたら同時に消す
         });
     }
 

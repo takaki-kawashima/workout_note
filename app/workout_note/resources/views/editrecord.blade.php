@@ -34,7 +34,7 @@
         <main class="py-4">
             <div class="row justify-content-around">
                 <div class="col-md-4">
-                
+             
                
                     <div class="row">
                         <div class="col">
@@ -51,33 +51,47 @@
                         </div>
                     </div>
 
+            
+                    @foreach($menus  as $menu)
+                    
+                    <form action="{{ route('record.update' ,['record' => $menu->id ])}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                        <div class="row">
+                            <div class="col">
+                                
+                                
+                                <select type="text"  value="{{ $menu->menu_id }}" class="form-control" placeholder="" aria-label="" name="menu_id">
+                                
+                                @foreach($syumokus as $syumoku)
+                                    <option value="{{ $syumoku->menu }}">{{ $syumoku->menu }}  </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                    @foreach($ids  as $id)
-
-                    <div class="row">
-                        <div class="col">
-                            <input  type="text" value="{{ $id->menu }}"  class="form-control" placeholder="" aria-label="" name="menu_id">
-                        </div>
-                        <div class="col">
-                            <input type="text" value="{{ $id->weight }}" class="form-control" placeholder="" aria-label="" name="weight">
-                        </div>
-                        <div class="col">
-                            <input type="text" value="{{ $id->rep }}" class="form-control" placeholder="" aria-label="" name="rep">
-                        </div>
-                        <div class="col">
-                            <input type="text" value="{{ $id->set }}" class="form-control" placeholder="" aria-label="" name="set">
-                        </div>
-                    </div>     
+                            <div class="col">
+                                <input type="text" value="{{ $menu->weight }}" class="form-control" placeholder="" aria-label="" name="weight">
+                            </div>
+                            <div class="col">
+                                <input type="text" value="{{ $menu->rep }}" class="form-control" placeholder="" aria-label="" name="rep">
+                            </div>
+                            <div class="col">
+                                <input type="text" value="{{ $menu->set }}" class="form-control" placeholder="" aria-label="" name="set">
+                            </div>
+                        </div>     
                     @endforeach
                            
                       
-                <div class='row justify-content-center'>
-                     <butoon type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>                     
-                </div>
+                        <div class='row justify-content-center'>
+                            <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>                     
+                        </div>
                 
+                    </form> 
+                </div> 
+            </div>
+        </main>                               
+    </div>                                  
 
-                </form>                                 
-                                       
 
 
 </body>

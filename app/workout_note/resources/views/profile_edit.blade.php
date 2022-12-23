@@ -26,9 +26,6 @@
     
 </header>
 <div class="container">
-
-
-
     <div class="row justify-content-center">
 <div class="col-md-8">
             <div class="card">
@@ -36,55 +33,55 @@
 
                 <div class="card-body">
 <body>
-@foreach($prof  as $profile)
-<img src="{{ asset('storage/img/' . $profile->path) }}" width="100" height="100">
-
-
-@endforeach
-
-<form action="{{ route('item.store') }}" method="POST" enctype="multipart/form-data">
-@csrf
-<input type="file" name="img_path">
-<input type="submit" value="アップロード">
-</form>
-
 
 <table class="table table-striped">
-  
 @foreach($prof  as $profile)
+                        </div>
+                                    <form action="{{ route('profileupdate' ,['id' => $profile->id ])}}" method="post">
+                            @csrf
+
+                            
+ 
+
+  
+
 <tr><th>
 <h3>名前</h3>
 </th></tr>
 <tr><th>
-{{ $profile->name }} 
+ <input  type="text" value="{{ $profile->name }}"  class="form-control" placeholder="" aria-label="" name="name">
 </th></tr>
 <tr><th>
 <br><h3>フリガナ</h3>
 </th></tr>
 <tr><th>
-{{ $profile->rubi }}
+<input  type="text" value="{{ $profile->rubi }}"  class="form-control" placeholder="" aria-label="" name="rubi">
 </th></tr>
 <tr><th>
 <br><h3>アドレス</h3>
 </th></tr>
 <tr><th>
-{{ $profile->email }}
+<input  type="text" value="{{ $profile->email }}"  class="form-control" placeholder="" aria-label="" name="email">
 </th></tr>
 <tr><th>
 <br><h3>目的</h3>
 </th></tr>
 <tr><th>
-{{ $profile->purpose }}
+<select   type="text" value="{{ $profile->purpose }}"  class="form-control" placeholder="" aria-label="" name="purpose">
+                                <option value="パワーアップ">パワーアップ</option>
+                                <option value="バルクアップ">バルクアップ</option>
+                                <option value="シェイプアップ">シェイプアップ</option>
+</select>
 </th></tr>
 
 @endforeach
 </table>
 <br>
-<a href="{{ route('editprofile') }}">
-      <button type='button' class=''>編集</button>
-      </a>
+<div class='row justify-content-center'>
+    <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>
+</div> 
 
-
+</form>
       </div>
         </div>
     </div>

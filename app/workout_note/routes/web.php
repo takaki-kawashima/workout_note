@@ -21,6 +21,8 @@ use App\Http\Controllers\RecordController;
 
 Auth::routes();
 
+
+
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
@@ -28,37 +30,57 @@ Route::post('password/reset/{token}', 'Auth\ResetPasswordController@reset');
 
 Route::group(['middleware' => 'auth'],function(){
 
-
+Route::get('/',[RecordController::class,'index'])->name('top');
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/',[RecordController::class,'index'])->name('top');
+Route::resource('record', 'RecordController');
+
+
+
 
 Route::get('/my',[TopController::class,'mypage'])->name('mypage');
 Route::get('/menu',[TopController::class,'menu'])->name('menu');
+
 Route::get('/profile',[TopController::class,'profile'])->name('prof');
+Route::get('/editprofile',[RegisterController::class,'EditProfile'])->name('editprofile');
 
 
-Route::get('/profile_update',[RegisterController::class,'profile_update'])->name('prof_update');
+Route::post('/profile_update/{id}',[RegisterController::class,'profile_update'])->name('profileupdate');
 
 
-Route::get('/workout',[RecordController::class,'create'])->name('workout');
-Route::post('/workout',[RecordController::class,'store']);
+
 
 Route::get('/menuadd',[RegisterController::class,'menuadd'])->name('add');
 Route::post('/menuadd',[RegisterController::class, 'menuadd2']);
 
 
-Route::get('/detail/{id}', [RecordController::class,'show'])->name('detail');
-Route::get('/editrecord/{id}', [RecordController::class,'edit'])->name('edit');
-Route::post('/editrecord2',[RecordController::class,'update'])->name('editreco');
 
-Route::get('/delete/{id}',[RegisterController::class, 'Delete'])->name('delete');
+
+Route::get('/delete/{id}',[RecordController::class, 'destroy'])->name('delete');
+
+Route::post('/comment_add/{id}',[RegisterController::class, 'commentAdd'])->name('commentadd');
+
+Route::get('/create', [RegisterController::class, 'create'])->name('item.create');
+
+Route::post('/store', [RegisterController::class, 'store'])->name('item.store');
+
+Route::get('/userlist',[TopController::class,'userlist'])->name('userlist');
+
+Route::get('/commentall',[TopController::class,'commentall'])->name('commentall');
+Route::get('/commentlist/{id}',[TopController::class,'commentlist'])->name('commentlist');
+Route::get('/commentdelete/{id}',[TopController::class,'commentdelete'])->name('commentdelete');
+
+Route::get('/userdelete/{id}',[TopController::class,'userdelete'])->name('userdelete');
+
+
+
+Route::get('/create', [TopController::class, 'create'])->name('item.create');
+Route::post('/store', [TopController::class, 'store'])->name('item.store');
+
 
 
 
 });
 
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
