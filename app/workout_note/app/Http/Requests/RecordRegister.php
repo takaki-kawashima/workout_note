@@ -24,14 +24,12 @@ class RecordRegister extends FormRequest
     public function rules()
     {
         return [
-            // 'body_weight' => 'numeric',
-            // 'menu_id' =>'required',
-            // 'weight' =>'numeric',
-            // 'rep' => 'numeric',
-            // 'set' => 'numeric',
-          
-           
-            //
+            'title' => 'required',
+            'body_weight' => 'numeric',
+            'records.*.menu_id' =>'required',
+            'records.*.weight' =>'numeric',
+            'records.*.rep' => 'numeric',
+            'records.*.set' => 'numeric',
         ];
     }
 }

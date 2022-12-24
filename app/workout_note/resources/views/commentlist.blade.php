@@ -11,42 +11,48 @@
 <h1>コメントリスト</h1>
 <a href="{{ route('userlist') }}">
     <button type='button' class=top>戻る</button>
-            </a>
+</a>
 <table class="table table-striped">
 
 
 
- 
-<div class="col-sm-8" style="text-align:right;">
-  <div class="paginate">
 
-  </div>
-</div>
+    <div class="col-sm-8" style="text-align:right;">
+        <div class="paginate">
+
+        </div>
+    </div>
 
 
 
-  <thead>
-      <tr><th>コメント</th><th></th><th>
-  </thead>
-  <tbody>
-  @foreach ($comments as $comment)
-      <tr>
-   
-     
-     
-                           
-                            <td class="border px-4 ">{{ $comment->comment }}</td>
-                            <td><div class='d-flex justify-content-center ' >
-                        <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
+    <thead>
+        <tr>
+            <th>コメント</th>
+            <th></th>
+            <th>
+    </thead>
+    <tbody>
+        @foreach ($comments as $comment)
+        <tr>
+
+
+
+
+            <td class="border px-4 ">{{ $comment->comment }}</td>
+            <td>
+                <div class='d-flex justify-content-center '>
+                    <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
                         <button class='btn btn-primary w-150 mt-3'>削除</button>
-                        </a></td>
-      </tr>
-      @endforeach
-  </tbody>
+                    </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
 </table>
 
 <style>
-
-.table {width: 80%;
-    margin-left: 130px;}
+    .table {
+        width: 80%;
+        margin-left: 130px;
+    }
 </style>

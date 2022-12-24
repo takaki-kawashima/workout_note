@@ -58,7 +58,7 @@ Route::post('/menuadd',[RegisterController::class, 'menuadd2']);
 
 Route::get('/delete/{id}',[RecordController::class, 'destroy'])->name('delete');
 
-Route::post('/comment_add/{id}',[RegisterController::class, 'commentAdd'])->name('commentadd');
+Route::post('/comment/add/ajax',[RegisterController::class, 'commentAdd'])->name('commentadd');
 
 Route::get('/create', [RegisterController::class, 'create'])->name('item.create');
 

@@ -26,33 +26,34 @@ class RecordController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-  
+
 
     public function index(Request $request)
     {
         // dd($request);
-        
 
-        
-        $menu= DB::table('users')
-                // ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
-                ->join('records', 'users.id', '=', 'records.user_id')
-                ->get();
 
-                $user_flg=1;
-                $nomaluser=0;
+        $menu = DB::table('users')
+            // ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
+            ->join('records', 'users.id', '=', 'records.user_id')
+            ->get();
 
+        $user_flg = 1;
+        $nomaluser = 0;
 
 
 
-     
-        return view('top', [
-            'menus'=>$menu,
-            'flg' =>$user_flg,
-            'flgs'=>$nomaluser,
-        ]
+
+
+        return view(
+            'top',
+            [
+                'menus' => $menu,
+                'flg' => $user_flg,
+                'flgs' => $nomaluser,
+            ]
         );
-       
+
         //トップ
     }
 
@@ -65,16 +66,18 @@ class RecordController extends Controller
     {
         $user = auth()->id();
         $menu = Menu::where('user_id', '0')
-        ->orwhere('user_id','=',$user)
-        ->get();
+            ->orwhere('user_id', '=', $user)
+            ->get();
 
 
         // dd($menu);
-       {
-            return view('workoutregister', [
-                'menus'=>$menu
-            ]
-        );
+        {
+            return view(
+                'workoutregister',
+                [
+                    'menus' => $menu
+                ]
+            );
         }
     }
 
@@ -86,60 +89,42 @@ class RecordController extends Controller
      */
     public function store(RecordRegister $request)
     {
-    //  dd($request);
+        //  dd($request);
         //追加処理
 
-       
+
         $data = new Record;
 
         $user = auth()->id();
 
 
 
-        $data->title=$request->title; 
+        $data->title = $request->title;
 
-        $data->body_weight=$request->body_weight;
-        $data->user_id =$user;
+        $data->body_weight = $request->body_weight;
+        $data->user_id = $user;
         $data->date = today();
-      
+
         $data->save();
 
-        $workout = new MenuRecord;
-// dd($request->menu_id);
-        foreach($request->menu_id as $menu_id=>$menu){
-            // dd($menu);
-            $workout->menu_id =$menu_id;
-
-        }
-
-        foreach($request->weight as $weight){
-            $workout->weight =$weight;
-        }
-        foreach($request->rep as $rep){
-            $workout->rep =$rep;
-        }
-        foreach($request->set as $set){
-            $workout->set =$set;
-        }
-
-
         
-  
-          $workout->record_id =$data->id;
-       
-          $workout->save();
-
+        // dd($request->records);
+        foreach ($request->records as $record) {
+            $workout = new MenuRecord;
+            $workout->menu_id = $record['menu_id'];
+            $workout->weight = $record['weight'];
+            $workout->set = $record['set'];
+            $workout->rep = $record['rep'];
+            $workout->record_id = $data->id;
+            $workout->save();
+        }
         
-        return redirect('my', 
-            );
-
-        
-
-
-     
+        return redirect(
+            'my',
+        );
     }
 
- 
+
 
 
     /**
@@ -152,21 +137,24 @@ class RecordController extends Controller
     {
         // dd($id);
         //詳細表示
-        $menu= DB::table('records')
-        ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
-       
-        ->where('record_menu.record_id','=',$id)
-        ->get();
+        $menu = DB::table('records')
+            ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
+
+            ->where('record_menu.record_id', '=', $id)
+            ->get();
         // dd($menu);
 
-        $comment=DB::table('users')
-        ->join('comments','users.id','=','comments.user_id')
-        ->where('record_id','=',$id)
-        ->get();
-// dd($comment);
-        return view('detail', [
-        'menus'=>$menu,
-        'comments'=>$comment,]
+        $comment = DB::table('users')
+            ->join('comments', 'users.id', '=', 'comments.user_id')
+            ->where('record_id', '=', $id)
+            ->get();
+        // dd($comment);
+        return view(
+            'detail',
+            [
+                'menus' => $menu,
+                'comments' => $comment,
+            ]
         );
     }
 
@@ -180,21 +168,23 @@ class RecordController extends Controller
     {
         // dd($id);
         //編集画面
-        $menu= DB::table('records')
-        ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
-        // ->join('menus', 'record_menu.menu_id', '=', 'menus.id')
-        ->where('record_menu.id','=',$id)
-        ->get();
+        $menu = DB::table('records')
+            ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
+            // ->join('menus', 'record_menu.menu_id', '=', 'menus.id')
+            ->where('record_menu.id', '=', $id)
+            ->get();
 
         $syumoku = Menu::where('user_id', '1')->get();
 
-       
-// dd($menu);
-return view('editrecord', [
-    'menus'=>$menu,
-    'syumokus'=>$syumoku,
-]
-);
+
+        // dd($menu);
+        return view(
+            'editrecord',
+            [
+                'menus' => $menu,
+                'syumokus' => $syumoku,
+            ]
+        );
     }
 
     /**
@@ -204,30 +194,30 @@ return view('editrecord', [
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(int $id ,Request $request)
+    public function update(int $id, Request $request)
     {
         //編集処理
-        
+
         // dd($request);
-        
-        $menu= DB::table('records')
-        ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
-        // ->join('menus', 'record_menu.menu_id', '=', 'menus.id')
-        ->where('record_menu.id','=',$id)
-        
-        
-                    ->update([
-                        'menu_id' => $request->menu_id,
-                        'weight' => $request->weight,
-                         'rep'=> $request->rep,
-                         'set'=> $request->set,
-            
-                        
-                    ]);
-   
-            // $menus->save();
-    
-            return redirect('/');
+
+        $menu = DB::table('records')
+            ->join('record_menu', 'records.id', '=', 'record_menu.record_id')
+            // ->join('menus', 'record_menu.menu_id', '=', 'menus.id')
+            ->where('record_menu.id', '=', $id)
+
+
+            ->update([
+                'menu_id' => $request->menu_id,
+                'weight' => $request->weight,
+                'rep' => $request->rep,
+                'set' => $request->set,
+
+
+            ]);
+
+        // $menus->save();
+
+        return redirect('/');
     }
 
     /**
@@ -239,20 +229,18 @@ return view('editrecord', [
     public function destroy($id)
     {
         //削除
-// dd($id);
-        
-        $record=DB::table('records')
-            ->where('id', '=', $id);
-//    $record=$instance->find($id);
-   
-// dd($record);
-    
+        // dd($id);
 
-    $record->delete();
-    
-    
-    return redirect('/');
-    
-}
-    
+        $record = DB::table('records')
+            ->where('id', '=', $id);
+        //    $record=$instance->find($id);
+
+        // dd($record);
+
+
+        $record->delete();
+
+
+        return redirect('/');
+    }
 }

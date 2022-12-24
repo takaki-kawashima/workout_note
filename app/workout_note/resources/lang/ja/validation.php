@@ -147,12 +147,14 @@ return [
     */
 
     'attributes' => [
-        'menu_id' => '種目は',
-        'weight' => 'Weightは',
-        'rep' => 'repは',
-        'set' => 'setは',
+        'title' => 'タイトルは',
+        'records.*.menu_id' => '種目は',
+        'records.*.weight' => 'Weightは',
+        'records.*.rep' => 'repは',
+        'records.*.set' => 'setは',
         'menu'=> 'トレーニング種目は',
         'body_weight'=>'体重は',
+
     ],
 
 ];

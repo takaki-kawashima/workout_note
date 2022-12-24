@@ -31,9 +31,55 @@ class TopController extends Controller
                 
                 ->where('records.user_id','=',$user)
                 ->where("created_at","like",date("Y") . "%")
-                ->get();
-                // dd($log_list);
+                ->orderBy('created_at')->take(7)->get();
+              
+                // dd($log_list[0]);
 // dd($menu);
+
+
+
+
+
+
+// if($log_list[0]>$log_list[1]){
+//     color:red;
+// }
+// elseif($log_list[0]<$log_list[1]){
+
+// }
+// if($log_list[1]>$log_list[2]){
+//     color:red;
+// }
+// elseif($log_list[1]<$log_list[2]){
+    
+// }
+// if($log_list[2]>$log_list[3]){
+//     color:red;
+// }
+// elseif($log_list[2]<$log_list[3]){
+    
+// }
+// if($log_list[3]>$log_list[4]){
+//     color:red;
+// }
+// elseif($log_list[3]<$log_list[4]){
+    
+// }
+// if($log_list[4]>$log_list[5]){
+//     color:red;
+// }
+// elseif($log_list[4]<$log_list[5]){
+    
+// }
+// if($log_list[5]>$log_list[6]){
+//     color:red;
+// }
+// elseif($log_list[5]<$log_list[6]){
+    
+// }
+
+
+
 
 
         
@@ -142,7 +188,7 @@ public function userlist( ) {
     
 
     $user= DB::table('users')
-           
+    ->where('user_flg', '0')
             
             ->get();
 

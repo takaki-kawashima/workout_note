@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -34,37 +36,37 @@
         <main class="py-4">
             <div class="row justify-content-around">
                 <div class="col-md-4">
-             
-               
+
+
                     <div class="row">
                         <div class="col">
-                        <h3>種目</h3>
+                            <h3>種目</h3>
                         </div>
                         <div class="col">
-                        <h3>Weight</h3>
+                            <h3>Weight</h3>
                         </div>
                         <div class="col">
-                        <h3>Rep</h3>
+                            <h3>Rep</h3>
                         </div>
                         <div class="col">
-                        <h3>Set</h3>
+                            <h3>Set</h3>
                         </div>
                     </div>
 
-            
-                    @foreach($menus  as $menu)
-                    
+
+                    @foreach($menus as $menu)
+
                     <form action="{{ route('record.update' ,['record' => $menu->id ])}}" method="post">
-                            @csrf
-                            @method('PATCH')
+                        @csrf
+                        @method('PATCH')
                         <div class="row">
                             <div class="col">
-                                
-                                
-                                <select type="text"  value="{{ $menu->menu_id }}" class="form-control" placeholder="" aria-label="" name="menu_id">
-                                
-                                @foreach($syumokus as $syumoku)
-                                    <option value="{{ $syumoku->menu }}">{{ $syumoku->menu }}  </option>
+
+
+                                <select type="text" value="{{ $menu->menu_id }}" class="form-control" placeholder="" aria-label="" name="menu_id">
+
+                                    @foreach($syumokus as $syumoku)
+                                    <option value="{{ $syumoku->menu }}">{{ $syumoku->menu }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -78,32 +80,32 @@
                             <div class="col">
                                 <input type="text" value="{{ $menu->set }}" class="form-control" placeholder="" aria-label="" name="set">
                             </div>
-                        </div>     
-                    @endforeach
-                           
-                      
-                        <div class='row justify-content-center'>
-                            <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>                     
                         </div>
-                
-                    </form> 
-                </div> 
+                        @endforeach
+
+
+                        <div class='row justify-content-center'>
+                            <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
-        </main>                               
-    </div>                                  
+        </main>
+    </div>
 
 
 
 </body>
+
 </html>
 
 <style>
-    
     .row {
-    display: flex;
-    flex-wrap: wrap;
-    /* margin-right: -15px; */
-    margin-left: -155px;
-    width: 130%;
-}
+        display: flex;
+        flex-wrap: wrap;
+        /* margin-right: -15px; */
+        margin-left: -155px;
+        width: 130%;
+    }
 </style>

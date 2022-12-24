@@ -1,4 +1,3 @@
-
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -11,36 +10,47 @@
 
 <h1>コメントリスト</h1>
 <table class="table table-striped">
-  <thead>
-  <form method="get" action="" class="form-inline">
-    <div class="form-group">
-        <input type="text" name="keyword" class="form-control" value="" placeholder="コメント">
-    </div>
-    <div class="form-group">
-        <input type="submit" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
-    </div>
-</form>
-      <tr><th>コメント</th><th></th><th></th></tr>
-  </thead>
-  <tbody>
-  @foreach ($comments as $comment)
-      <tr>
-   
-     
-     
-                           
-                            <td class="border px-4 ">{{ $comment->comment }}</td>
-                            <td><div class='d-flex justify-content-center ' >
-                        <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
+    <thead>
+        <form method="get" action="" class="form-inline">
+            <div class="form-group">
+                <a href="{{ route('userlist') }}">
+                    <button type='button' class=top>ユーザリスト</button>
+                </a>
+                <input type="text" name="keyword" class="form-control" value="" placeholder="コメント">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
+            </div>
+        </form>
+
+        <tr>
+            <th>コメント</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($comments as $comment)
+        <tr>
+
+
+
+
+            <td class="border px-4 ">{{ $comment->comment }}</td>
+            <td>
+                <div class='d-flex justify-content-center '>
+                    <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
                         <button class='btn btn-primary w-150 mt-3'>削除</button>
-                        </a></td>
-      </tr>
-      @endforeach
-  </tbody>
+                    </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
 </table>
 
 <style>
-
-.table {width: 80%;
-    margin-left: 130px;}
+    .table {
+        width: 80%;
+        margin-left: 130px;
+    }
 </style>
