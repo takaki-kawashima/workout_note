@@ -10,7 +10,7 @@ use App\MenuRecord;
 use App\Menu;
 use App\User;
 use App\Http\Requests\RecordRegister;
-
+use App\Http\Requests\Edit;
 
 
 use Illuminate\Support\Facades\DB;
@@ -65,7 +65,7 @@ class RecordController extends Controller
     public function create()
     {
         $user = auth()->id();
-        $menu = Menu::where('user_id', '0')
+        $menu = Menu::where('user_id', '2')
             ->orwhere('user_id', '=', $user)
             ->get();
 
@@ -174,7 +174,11 @@ class RecordController extends Controller
             ->where('record_menu.id', '=', $id)
             ->get();
 
-        $syumoku = Menu::where('user_id', '1')->get();
+        $user = auth()->id();
+        $syumoku = Menu::where('user_id', '2')
+        ->orwhere('user_id', '=', $user)
+        ->get();
+
 
 
         // dd($menu);
@@ -194,7 +198,7 @@ class RecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(int $id, Request $request)
+    public function update(int $id, Edit $request)
     {
         //編集処理
 

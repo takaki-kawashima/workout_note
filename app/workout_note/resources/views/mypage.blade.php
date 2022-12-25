@@ -36,17 +36,17 @@
 
 
     <header>
- 
-    <p class="my">マイページ</p>
-    <a href="{{ route('top') }}">
-          <button type='button' class=top >TOP</button>
-        </a>
-     
+
+      <p class="my">マイページ</p>
+      <a href="{{ route('top') }}">
+        <button type='button' class=top>TOP</button>
+      </a>
+
       <div class=tophead>
 
 
-       
-       
+
+
       </div>
 
 
@@ -98,7 +98,7 @@
                   <tr>
 
 
-                    
+
                     <th scope='col'>{{ $menu->date }}</th>
                     <th scope='col'>{{ $menu->title }}</th>
 
@@ -127,40 +127,39 @@
 
 
 
-      <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <div class="taijyu">
-        <h1>体重推移</h1>
+        <div class="container">
+          <table class="table">
+            <thead>
+              <tr>
+                <div class="taijyu">
+                  <h1>体重推移</h1>
+                </div>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope='col'>
+                @foreach($log_list as $log)
+
+                <td>{{ $log->date }}</td>
+                @endforeach
+              </tr>
+              <tr scope='col'>
+
+                @foreach($log_list as $key => $log)
+                @if ($key == 0)
+                <td>{{ $log->body_weight }}</td>
+                @else
+                @if($log_list[$key - 1]->body_weight > $log->body_weight)
+                <td class="dec">{{ $log->body_weight }}</td>
+                @else
+                <td class="inc">{{ $log->body_weight }}</td>
+                @endif
+                @endif
+                @endforeach
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </tr>
-    </thead>
-    <tbody>
-    <tr scope='col'>
-    @foreach($log_list as $log)
-      
-      <td>{{ $log->date }}</td>
-      @endforeach    
-      </tr>
-      <tr scope='col'>
-        
-      @foreach($log_list as $key => $log)
-      @if ($key == 0) 
-      <td>{{ $log->body_weight }}</td> 
-      @else
-          @if($log_list[$key - 1]->body_weight > $log->body_weight)
-          <td class="dec">{{ $log->body_weight }}</td> 
-          @else
-           <td class="inc">{{ $log->body_weight }}</td> 
-          @endif
-        @endif
-      @endforeach
-      </tr>
-    </tbody>
-  </table>
-</div>
-       
 
 
 
@@ -168,111 +167,120 @@
 
 
 
-        </div>
+
       </div>
     </div>
-    </body>
+    </div>
+  </body>
 
-    <style>
-      .inc{
-        color: red;
-      }
-      .dec{
-        color: blue;
-      }
-      body{
-        /* background-image:url(https://img.freepik.com/free-photo/cast-iron-dumbbell-weights_1048-11523.jpg?w=2000&t=st=1671850564~exp=1671851164~hmac=db768c2ecb490d92ba64deca64934a9d0ec3d55ecedd58eccb11cb67b925f03a); */
-        background-color:#D7EEFF;	
-      }
-      .heads {
-        display: flex;
-        align-items: center;
-      }
+  <style>
+    .inc {
+      color: red;
+    }
 
-      .logo {
-        margin-left: auto;
-        font-size: 30px;
-      }
+    .dec {
+      color: blue;
+    }
 
-      .top {
-        display: inline-block;
-        border-radius: 50%;
-        /* 角丸       */
-        font-size: 15pt;
-        /* 文字サイズ */
-        text-align: center;
-        /* 文字位置   */
-        cursor: pointer;
-        /* カーソル   */
-        padding: 23px 37px;
-        /* 余白       */
-        background: #000066;
-        /* 背景色     */
-        color: #ffffff;
-        /* 文字色     */
-        line-height: 1em;
-        /* 1行の高さ  */
-        transition: .3s;
-        /* なめらか変化 */
-        box-shadow: 6px 6px 3px #666666;
-        /* 影の設定 */
-        border: 2px solid #000066;
-        /* 枠の指定 */
-        margin-left: 1200px;
-      }
+    body {
+      /* background-image:url(https://img.freepik.com/free-photo/cast-iron-dumbbell-weights_1048-11523.jpg?w=2000&t=st=1671850564~exp=1671851164~hmac=db768c2ecb490d92ba64deca64934a9d0ec3d55ecedd58eccb11cb67b925f03a); */
+      background-color: #D7EEFF;
+    }
 
-      .head {
-        max-width: 90%;
-        margin-left:5% ;
-        display: flex;
-        justify-content: space-between;
-        margin-top: 30px;
-        margin-bottom: 20px;
-      }
+    .heads {
+      display: flex;
+      align-items: center;
+    }
 
-      .log {    
-        overflow: auto;
-        width: 70%;
-        height: 300px;
-      }
+    .logo {
+      margin-left: auto;
+      font-size: 30px;
+    }
 
-      .my {
-        font-size: 30px;
-        width: 500px !important;
-      }
+    .top {
+      display: inline-block;
+      border-radius: 50%;
+      /* 角丸       */
+      font-size: 15pt;
+      /* 文字サイズ */
+      text-align: center;
+      /* 文字位置   */
+      cursor: pointer;
+      /* カーソル   */
+      padding: 23px 37px;
+      /* 余白       */
+      background: #000066;
+      /* 背景色     */
+      color: #ffffff;
+      /* 文字色     */
+      line-height: 1em;
+      /* 1行の高さ  */
+      transition: .3s;
+      /* なめらか変化 */
+      box-shadow: 6px 6px 3px #666666;
+      /* 影の設定 */
+      border: 2px solid #000066;
+      /* 枠の指定 */
+      margin-left: 1200px;
+    }
 
-      .h3 {
-        width: 100px;
-      }
+    .head {
+      max-width: 90%;
+      margin-left: 5%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
 
-      .log {
- 
-        width: 100%;
+    .log {
+      overflow: auto;
+      width: 70%;
+      height: 300px;
+    }
 
-      }
+    .my {
+      font-size: 30px;
+      width: 500px !important;
+    }
 
-      .btn--orange,
-a.btn--orange {
-  color: #fff;
-  background-color: #eb6100;
-}
-.btn--orange:hover,
-a.btn--orange:hover {
-  color: #fff;
-  background: #f56500;
-}
-  body {
-    padding-top: 20px;
-    margin-left: 2.5%;
-max-width: 95%
-}
-.table{
-  text-align: center;
-}
-.taijyu{
-  text-align: center;
-}
-.th{
-  width: 60px;
-}
-    </style>
+    .h3 {
+      width: 100px;
+    }
+
+    .log {
+
+      width: 100%;
+
+    }
+
+    .btn--orange,
+    a.btn--orange {
+      color: #fff;
+      background-color: #eb6100;
+    }
+
+    .btn--orange:hover,
+    a.btn--orange:hover {
+      color: #fff;
+      background: #f56500;
+    }
+
+    body {
+      padding-top: 20px;
+      margin-left: 2.5%;
+      max-width: 95%
+    }
+
+    .table {
+      text-align: center;
+    }
+
+    .taijyu {
+      text-align: center;
+    }
+
+    .th {
+      width: 60px;
+    }
+  </style>

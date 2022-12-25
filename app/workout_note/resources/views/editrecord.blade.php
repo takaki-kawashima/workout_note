@@ -33,6 +33,17 @@
                 </button>
             </div>
         </nav>
+        <div class='panel-body'>
+            @if($errors->any())
+            <div class='alert alert-danger'>
+                <ul>
+                    @foreach($errors->all() as $message)
+                    <li>{{ $message }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+        </div>
         <main class="py-4">
             <div class="row justify-content-around">
                 <div class="col-md-4">
@@ -66,7 +77,7 @@
                                 <select type="text" value="{{ $menu->menu_id }}" class="form-control" placeholder="" aria-label="" name="menu_id">
 
                                     @foreach($syumokus as $syumoku)
-                                    <option value="{{ $syumoku->menu }}">{{ $syumoku->menu }} </option>
+                                    <option value="{{ $syumoku->menu }}">{{ $menu->menu_id }} </option>
                                     @endforeach
                                 </select>
                             </div>

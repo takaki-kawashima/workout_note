@@ -148,17 +148,17 @@
     margin-left: 100px;
     width: 1000px;
     padding-top: 30px;
-    
+
   }
+
   body {
     padding-top: 20px;
     margin-left: 2.5%;
-max-width: 95%
-    
-  
-}
-body{
-        /* background-image:url(https://img.freepik.com/free-photo/cast-iron-dumbbell-weights_1048-11523.jpg?w=2000&t=st=1671850564~exp=1671851164~hmac=db768c2ecb490d92ba64deca64934a9d0ec3d55ecedd58eccb11cb67b925f03a); */
-        background-color:#D7EEFF;	
-      }
+    max-width: 95%
+  }
+
+  body {
+    /* background-image:url(https://img.freepik.com/free-photo/cast-iron-dumbbell-weights_1048-11523.jpg?w=2000&t=st=1671850564~exp=1671851164~hmac=db768c2ecb490d92ba64deca64934a9d0ec3d55ecedd58eccb11cb67b925f03a); */
+    background-color: #D7EEFF;
+  }
 </style>

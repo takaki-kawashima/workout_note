@@ -165,7 +165,7 @@
     text-align: center;
     display: inline-block;
     font-size: 30px;
-    margin-left: 485px;
+    margin-left: 465px;
   }
 
   button {
@@ -176,8 +176,7 @@
   body {
     padding-top: 20px;
     margin-left: 2.5%;
-max-width: 95%
-    
+    max-width: 95%
   }
 
   .top {
@@ -214,11 +213,10 @@ max-width: 95%
 
   .koumoku {
     padding-top: 25px;
-    
+
   }
 
   .h4 {
     margin-left: 50px;
   }
-
 </style>

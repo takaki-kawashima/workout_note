@@ -83,7 +83,7 @@ class Registercontroller extends Controller
         $menu->save();
 
         return redirect(
-            'workout',
+            'record/create',
 
 
         );
@@ -216,5 +216,22 @@ class Registercontroller extends Controller
         $request->file('image')->storeAs('public/' . $dir, $file_name);
 
         return redirect('/profile');
+    }
+    public function delete($id)
+    {
+        //削除
+        // dd($id);
+
+        $record = DB::table('record_menu')
+            ->where('id', '=', $id);
+        //    $record=$instance->find($id);
+
+        // dd($record);
+
+
+        $record->delete();
+
+
+        return back();
     }
 }

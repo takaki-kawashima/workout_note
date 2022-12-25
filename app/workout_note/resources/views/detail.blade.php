@@ -6,16 +6,12 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 
 
@@ -62,21 +58,18 @@
                     <th scope='col'>{{ $menu->rep }}</th>
                     <th scope='col'>{{ $menu->set }}</th>
                     <th>
-                        <form action="{{ route('record.destroy' ,['record' => $menu->id ])}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <a href="{{ route('record.destroy' , $menu->record_id) }}"
-                                onclick="return confirm('削除してよろしいですか？')">
-                                @if((Auth::user()->id) == ($menu->user_id))
-                                <button class='btn btn-primary w-150 mt-3'>削除</button>
-                                @endif
-                            </a>
-                        </form>
-                    </th>
-                    <th>
                         <a href="{{ route('record.edit' , $menu->id) }}">
                             @if((Auth::user()->id) == ($menu->user_id))
                             <button class='btn btn-primary w-150 mt-3'>編集</button>
+                            @endif
+                        </a>
+                    </th>
+                    <th>
+
+
+                        <a href="{{ route('delete' , $menu->id) }}" onclick="return confirm('削除してよろしいですか？')">
+                            @if((Auth::user()->id) == ($menu->user_id))
+                            <button class='btn btn-primary w-150 mt-3'>削除</button>
                             @endif
                         </a>
                     </th>
@@ -103,7 +96,7 @@
                 <input type=hidden name='record_id' value="{{$menu->record_id}}" />
                 <input type=text class='form-control comment_add' name='comment' value="" />
                 <div class="form-group">
-                    <input type="button" class="btn btn-primary comment_btn" value="投稿"/>
+                    <input type="button" class="btn btn-primary comment_btn" value="投稿" />
                 </div>
         </form>
 
@@ -126,18 +119,20 @@
                 </tr>
             </thead>
             <tbody>
-               
+
                 @foreach($comments as $comment)
-                <td> {{ $comment->user_id }} </td>
+                <td> {{ $comment->name }} </td>
                 <td> {{ $comment->created_at }} </td>
                 <td> {{ $comment->comment }} </td>
-                <td><div class='d-flex justify-content-center ' >
+                <td>
+                    <div class='d-flex justify-content-center '>
                         <a href="{{ route('commentdelete' , $comment->id) }}" onclick="return confirm('削除してよろしいですか？')">
-                        @if((Auth::user()->id) == ($comment->user_id))
-                        <button class='btn btn-primary w-150 mt-3'>削除</button>
-                        @endif
-                        </a></td>
-                      
+                            @if((Auth::user()->id) == ($comment->user_id))
+                            <button class='btn btn-primary w-150 mt-3'>削除</button>
+                            @endif
+                        </a>
+                </td>
+
             </tbody>
             @endforeach
         </table>
@@ -147,7 +142,7 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $('.comment_btn').click(function () {
+    $('.comment_btn').click(function() {
         var record_id = $('input[name="record_id"]').val();
         var comment = $('input[name="comment"]').val();
         $.ajax({
@@ -161,7 +156,7 @@
                 'comment': comment,
                 'record_id': record_id
             },
-        }).done(function (data) {
+        }).done(function(data) {
             $(".coment_add").val("");
             var html = `
                                 <tbody>
@@ -170,14 +165,13 @@
                                     <td> ${data.comments.comment} </td>
                                 </tbody>
                                 `;
-      
+
             $("#comment_data").append(html);
-        }).fail(function (jqXHR, textStatus, errorThrown) {
+        }).fail(function(jqXHR, textStatus, errorThrown) {
             //通信が失敗したときの処理
             console.log('送信失敗', jqXHR, textStatus, errorThrown);
         });
     });
-
 </script>
 
 
@@ -209,25 +203,15 @@
         /* 枠の指定 */
 
     }
-    .comment_list{
-        overflow:auto;
-		width:300px; height:100px;
-		padding:5px;
-		border:2px dotted #ffffff;
-		color:#e8e8e8;
-		background-color:#5bc6ed;
-		line-height:1.5em;
+
+    .comment_list {
+        overflow: auto;
+        width: 300px;
+        height: 100px;
+        padding: 5px;
+        border: 2px dotted #ffffff;
+        color: #e8e8e8;
+        background-color: #5bc6ed;
+        line-height: 1.5em;
     }
-
 </style>
-
-
-
-<div class="media comment-visible">
-    <div class="media-body comment-body">
-        <div class="row ml-1">
-            <span class="comment-body-content" id="comment">${data.comments.comment}</span>
-        </div>
-        <small class="text-muted comment-body-time" id="created_at">${data.comments.created_at}</small>
-    </div>
-</div>
