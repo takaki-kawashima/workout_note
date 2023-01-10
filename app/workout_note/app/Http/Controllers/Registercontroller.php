@@ -184,7 +184,9 @@ class Registercontroller extends Controller
     {
 
         $user = auth()->id();
-        // dd($id);
+
+        
+
 
         $comment = new Comment;
 
@@ -192,10 +194,16 @@ class Registercontroller extends Controller
         $comment->comment = $request->comment;
         $comment->user_id = $user;
         $comment->record_id = $request->record_id;
+  
+
 
         $comment->save();
 
-        $json = ['comments' => $comment];
+        $user_name=DB::table('users')
+       ->find($user);
+// dd($user_name);
+        $json = ['comments' => $comment,
+    'user_name' => $user_name,];
         return response()->json($json);
     }
 

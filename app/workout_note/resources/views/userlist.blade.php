@@ -9,15 +9,12 @@
 
 <div class=head>
     <a href="{{ route('top') }}">
-        <button type='button' class=top>TOP</button>
+        <button type='button' class='top to'>TOP</button>
     </a>
-
     <h1>ユーザリスト</h1>
-
     <a href="{{ route('commentall') }}">
-        <button type='button' class='top'>コメント一覧</button>
+        <button type='button' class="btn btn--orange">コメント一覧</button>
     </a>
-
 </div>
 <table class="table table-striped">
     <thead>
@@ -33,12 +30,7 @@
     <tbody>
         @foreach ($users as $user)
         <tr>
-
             <td class="border px-4 py-2"> {{ $user->name }}</td>
-
-
-
-
             <td class="border px-4 ">{{ $user->rubi }}</td>
             <td class="border px-4  ">{{ $user->email }}</td>
             <td class="border px-4 ">{{ $user->purpose }}</td>
@@ -47,12 +39,14 @@
                     <a href="{{ route('commentlist',$user->id) }}">
                         <button class='btn btn-primary w-150 mt-3'>詳細</button>
                     </a>
+                </div>
             </td>
             <td>
                 <div class='d-flex justify-content-center '>
                     <a href="{{ route('userdelete' , $user->id) }}" onclick="return confirm('削除してよろしいですか？')">
                         <button class='btn btn-primary w-150 mt-3'>削除</button>
                     </a>
+                </div>
             </td>
         </tr>
         @endforeach
@@ -94,7 +88,23 @@
     .head {
         display: flex;
         align-items: center;
-        padding bottom: 30px;
-        margin top: 50px;
+       width: 100%;
+       max-width: 95%;
+        
+    }
+    .comment{margin-left: 250px;}
+    h1{margin-left: 450px;
+    width: 300px;}
+    .to{margin-left: 50px;}
+    .btn--orange,
+    a.btn--orange {
+      color: #fff;
+      background-color: #eb6100;
+    }
+
+    .btn--orange:hover,
+    a.btn--orange:hover {
+      color: #fff;
+      background: #f56500;
     }
 </style>

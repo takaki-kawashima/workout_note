@@ -9,42 +9,26 @@
 
 
  <!doctype html>
-
-
-
  <header>
-
      <div class=tophead>
-
-
-
          <a href="{{ route('mypage') }}">
              <button type='button' class=''>マイページ</button>
          </a>
      </div>
-
  </header>
  <div class="container">
      <div class="row justify-content-center">
          <div class="col-md-8">
              <div class="card">
                  <div class="card-header">{{ __('プロフィール') }}</div>
-
                  <div class="card-body">
 
                      <body>
-
                          <table class="table table-striped">
                              @foreach($prof as $profile)
                  </div>
                  <form action="{{ route('profileupdate' ,['id' => $profile->id ])}}" method="post">
                      @csrf
-
-
-
-
-
-
                      <tr>
                          <th>
                              <h3>名前</h3>
@@ -99,13 +83,8 @@
                      <div class='row justify-content-center'>
                          <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>
                      </div>
-
                  </form>
              </div>
          </div>
      </div>
-
- </div>
- </div>
-
  </div>

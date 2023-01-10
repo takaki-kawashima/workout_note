@@ -154,6 +154,9 @@ return [
         'records.*.set' => 'setは',
         'menu'=> 'トレーニング種目は',
         'body_weight'=>'体重は',
+        'weight' => 'weightは',
+        'rep' => 'repは',
+        'set' => 'setは',
 
     ],
 

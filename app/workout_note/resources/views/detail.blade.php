@@ -14,12 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 
-
-
     <!doctype html>
-
-
-
     <div class="card">
 
         <div class='text-center'>
@@ -29,14 +24,9 @@
     <a href="{{ route('record.index') }}">
         <button type='button' class=top>TOP</button>
     </a>
-
     <div class="card-body">
-
         <table class='table'>
-
-
             <thead>
-
                 <tr>
                     <th scope='col'>日付</th>
                     <th scope='col'>種目</th>
@@ -49,9 +39,7 @@
             </thead>
             @foreach($menus as $menu)
             <tbody>
-
                 <tr>
-
                     <th scope='col'>{{ $menu->date }}</th>
                     <th scope='col'>{{ $menu->menu_id }}</th>
                     <th scope='col'>{{ $menu->weight }}</th>
@@ -65,29 +53,17 @@
                         </a>
                     </th>
                     <th>
-
-
                         <a href="{{ route('delete' , $menu->id) }}" onclick="return confirm('削除してよろしいですか？')">
                             @if((Auth::user()->id) == ($menu->user_id))
                             <button class='btn btn-primary w-150 mt-3'>削除</button>
                             @endif
                         </a>
                     </th>
-
                 </tr>
-
-
             </tbody>
             @endforeach
-
         </table>
-
     </div>
-
-
-
-
-
     <div class="col-md-8">
         <h1>コメント</h1>
         <form action="{{ route('commentadd') }}" method="post">
@@ -99,16 +75,8 @@
                     <input type="button" class="btn btn-primary comment_btn" value="投稿" />
                 </div>
         </form>
-
-
-
-
     </div>
-
-
-
     <div class="container scrolls">
-
         <table class="table table-striped" id="comment_data">
             <thead class="thead-dark">
                 <tr>
@@ -119,7 +87,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @foreach($comments as $comment)
                 <td> {{ $comment->name }} </td>
                 <td> {{ $comment->created_at }} </td>
@@ -132,17 +99,16 @@
                             @endif
                         </a>
                 </td>
-
             </tbody>
             @endforeach
         </table>
-
     </div>
-
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $('.comment_btn').click(function() {
+        // var name = $('input[name="name"]').val();
         var record_id = $('input[name="record_id"]').val();
         var comment = $('input[name="comment"]').val();
         $.ajax({
@@ -153,6 +119,7 @@
             dataType: "json",
             type: 'POST',
             data: {
+                // 'name':name,
                 'comment': comment,
                 'record_id': record_id
             },
@@ -160,9 +127,10 @@
             $(".coment_add").val("");
             var html = `
                                 <tbody>
-                                    <td> ${data.comments.user_id} </td>
+                                    <td> ${data.user_name.name} </td>
                                     <td> ${data.comments.created_at} </td>
                                     <td> ${data.comments.comment} </td>
+                                    <td></td>
                                 </tbody>
                                 `;
 

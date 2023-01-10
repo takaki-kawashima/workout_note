@@ -52,7 +52,7 @@ Route::post('/profile_update/{id}',[RegisterController::class,'profile_update'])
 
 Route::get('/menuadd',[RegisterController::class,'menuadd'])->name('add');
 Route::post('/menuadd',[RegisterController::class, 'menuadd2']);
-
+Route::post('/upload',[RegisterController::class, 'upload']);
 
 
 Route::get('/delete/{id}',[RegisterController::class, 'delete'])->name('delete');

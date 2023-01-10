@@ -14,11 +14,7 @@
     <a href="{{ route('mypage') }}">
         <button type='button' class=top>マイページ</button>
     </a>
-
-
-
     <main class="py-4">
-
         <div class="card">
             <div class="card-header">
                 <div class='panel-body'>
@@ -32,16 +28,10 @@
                     </div>
                     @endif
                 </div>
-
-
                 <div class="card-body">
                     <div class="card-body">
                         <form action="{{ route('add')}}" method="post">
                             @csrf
-
-
-
-
                             <label for='name' class='mt-2'>トレーニング種目の追加</label>
                             <textarea class='form-control' name='menu'></textarea>
                             <div class='row justify-content-center'>
@@ -50,13 +40,10 @@
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
-        </div>
     </main>
-
-
+</body>
 
 
     <style>

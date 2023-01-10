@@ -9,8 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-
-
   <header>
 
     <div class=tophead>
@@ -20,78 +18,45 @@
       </a>
       <a href="{{ route('userlist') }}">
         @endif
-
         @if((Auth::user()->user_flg) == ($flg))
         <a href="{{ route('userlist') }}">
           <button type='button' class=top>ユーザリスト</button>
           @endif
         </a>
-
-
-
-
         <h3 class=logo>workout log</h3>
-
         <a href="/logout">
           <button type='button' class=top>ログアウト</button>
-
         </a>
-
-
-
-
     </div>
-
     @if((Auth::user()->user_flg) == ($flg))
     <a href="{{ route('commentall') }}">
       <button type='button' class=top>コメントリスト</button>
       @endif
     </a>
-
-
-
   </header>
-
   <div class="container">
-
-
     <div class="row">
-
       <div class="col-md-8">
         <div class=log>
-
-
-
           <div class="card-body">
             <div class="card-body">
               <table class='table'>
-
                 @foreach($menus as $menu)
                 <tr>
-
-
                   <th scope='col'>
-
                   </th>
                   <th scope='col'>{{ $menu->date }}</th>
                   <th scope='col'>{{ $menu->name }}</th>
                   <th scope='col'>{{ $menu->purpose}}</th>
                   <th scope='col'>{{ $menu->title }}</th>
-
                   <th scope='col'>
                     <a href="{{ route('record.show', $menu->id) }}">詳細</a>
                   </th>
-
-
-
-
                 </tr>
                 @endforeach
-
               </table>
             </div>
           </div>
-
         </div>
       </div>
     </div>

@@ -42,7 +42,6 @@
       <button type='button' class='btn btn-primary w-25 mt-3'>種目の追加</button>
     </div>
   </a>
-
   <form action="{{ route('record.store')}}" method="post">
     @csrf
     <div class="row">
@@ -52,7 +51,6 @@
       <div class="col">
         <input type="text" class="form-control" placeholder="" aria-label="" name="title" value="{{ old('title') }}">
       </div>
-
       <div class="col">
         <h3>体重</h3>
       </div>

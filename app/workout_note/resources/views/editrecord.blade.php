@@ -47,8 +47,6 @@
         <main class="py-4">
             <div class="row justify-content-around">
                 <div class="col-md-4">
-
-
                     <div class="row">
                         <div class="col">
                             <h3>種目</h3>
@@ -63,25 +61,29 @@
                             <h3>Set</h3>
                         </div>
                     </div>
-
-
                     @foreach($menus as $menu)
-
                     <form action="{{ route('record.update' ,['record' => $menu->id ])}}" method="post">
                         @csrf
                         @method('PATCH')
                         <div class="row">
                             <div class="col">
-
-
+                                
                                 <select type="text" value="{{ $menu->menu_id }}" class="form-control" placeholder="" aria-label="" name="menu_id">
 
                                     @foreach($syumokus as $syumoku)
-                                    <option value="{{ $syumoku->menu }}">{{ $menu->menu_id }} </option>
+                                    @if($syumoku->menu == $menu->menu_id)
+                                    <option value="{{ $syumoku->menu }}" selected>{{  $menu->menu_id }} </option>
+                                    @else
+                                    <option value="{{ $syumoku->menu }}" >{{  $syumoku->menu }} </option>
+                                    @endif
                                     @endforeach
                                 </select>
-                            </div>
 
+                             
+
+
+
+                            </div>
                             <div class="col">
                                 <input type="text" value="{{ $menu->weight }}" class="form-control" placeholder="" aria-label="" name="weight">
                             </div>
@@ -93,20 +95,14 @@
                             </div>
                         </div>
                         @endforeach
-
-
                         <div class='row justify-content-center'>
                             <button type='submit' class='btn btn-primary w-25 mt-3'>上書き</button>
                         </div>
-
                     </form>
                 </div>
             </div>
         </main>
     </div>
-
-
-
 </body>
 
 </html>

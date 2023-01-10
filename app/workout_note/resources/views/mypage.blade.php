@@ -28,32 +28,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
-
-
   <!doctype html>
 
   <body>
-
-
     <header>
-
+      <div class="header">
       <p class="my">マイページ</p>
-      <a href="{{ route('top') }}">
-        <button type='button' class=top>TOP</button>
-      </a>
-
-      <div class=tophead>
-
-
-
-
+     
+        <button type='button' class=top> <a href="{{ route('top') }}">TOP</a></button>
+      
       </div>
-
-
-
-
-
-      <!-- 2行目 -->
+      </header>
       <div class="head">
 
         <a href="{{ route('menu') }}">
@@ -65,54 +50,25 @@
         <a href="{{ route('prof') }}">
           <butoon type='button' class="btn btn--orange">プロフィール</button>
         </a>
-
-
-
       </div>
-
-
-
-    </header>
-
-
-
-
-
-
-
-
-
-
+    
     <div class="container">
       <div class="row">
-        <h1>トレーニング履歴</h1>
+        <h1>workout log</h1>
         <div class="col-md-8 log">
-
           <div class=log>
             <div class="card-body">
               <div class="card-body">
                 <table class='table'>
-
                   @foreach($menus as $menu)
-
                   <tr>
-
-
-
-                    <th scope='col'>{{ $menu->date }}</th>
+                    <th scope='col' class="date">{{ $menu->date }}</th>
                     <th scope='col'>{{ $menu->title }}</th>
-
-
                     <th scope='col'>
                       <a href="{{ route('record.show', $menu->id) }}">詳細</a>
                     </th>
-
-
-
-
                   </tr>
                   @endforeach
-
                 </table>
               </div>
             </div>
@@ -120,13 +76,8 @@
         </div>
       </div>
     </div>
-
-
     <div class="container">
       <div class="row">
-
-
-
         <div class="container">
           <table class="table">
             <thead>
@@ -139,12 +90,10 @@
             <tbody>
               <tr scope='col'>
                 @foreach($log_list as $log)
-
                 <td>{{ $log->date }}</td>
                 @endforeach
               </tr>
               <tr scope='col'>
-
                 @foreach($log_list as $key => $log)
                 @if ($key == 0)
                 <td>{{ $log->body_weight }}</td>
@@ -160,16 +109,7 @@
             </tbody>
           </table>
         </div>
-
-
-
-
-
-
-
-
       </div>
-    </div>
     </div>
   </body>
 
@@ -221,12 +161,13 @@
       /* 影の設定 */
       border: 2px solid #000066;
       /* 枠の指定 */
-      margin-left: 1200px;
+      margin-left: 1000px;
     }
+    .tate{width: 10px;}
 
     .head {
       max-width: 90%;
-      margin-left: 5%;
+      margin-left: 15%;
       display: flex;
       justify-content: space-between;
       margin-top: 30px;
@@ -242,6 +183,7 @@
     .my {
       font-size: 30px;
       width: 500px !important;
+      cursor: pointer;
     }
 
     .h3 {
@@ -283,4 +225,11 @@
     .th {
       width: 60px;
     }
+    .header{display: flex;
+      cursor: pointer;}
+    a{width: 300px;}
+    h1{    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Amatic SC', cursive;
+    font-size: 40px;}
   </style>
